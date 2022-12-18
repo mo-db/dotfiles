@@ -1,1 +1,1 @@
-init.lua
+/home/moritz/.config/nvim/init.lua
