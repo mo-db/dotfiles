@@ -8,6 +8,18 @@ require('packer').startup(function(use)
   use 'ellisonleao/gruvbox.nvim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'nvim-lualine/lualine.nvim'
+  use { -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    requires = {
+      -- Automatically install LSPs to stdpath for neovim
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      'j-hui/fidget.nvim',
+
+    },
+  }
 end)
 
 -- Keymaps
@@ -31,11 +43,11 @@ g.localleader ='\\'
 --Plugin Config--
 -----------------
 
---gruvbox
+-- 'ellisonleao/gruvbox.nvim'
 vim.o.termguicolors = true
 vim.cmd [[ colorscheme gruvbox ]]
 
---treesitter
+-- 'nvim-treesitter/nvim-treesitter'
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "python" },
 
@@ -47,7 +59,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
---lualine
+-- 'nvim-lualine/lualine.nvim'
 require('lualine').setup {
   options = {
     icons_enabled = false,
@@ -56,3 +68,15 @@ require('lualine').setup {
     section_separators = '',
   },
 }
+
+-- 'williamboman/mason.nvim'
+require("mason").setup()
+require("mason-lspconfig").setup {
+  ensure_installed = { "sumneko_lua", "solargraph", "clangd" }
+}
+
+-- 'neovim/nvim-lspconfig'
+
+
+-- 'j-hui/fidget.nvim'
+require('fidget').setup()
